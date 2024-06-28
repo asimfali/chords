@@ -5,23 +5,14 @@
 <div class="grid-container">
     <aside class="categories">
         <h2>Категории</h2>
-        <ul>
+        <ul id="category-list">
             {% for category in categories %}
-                <li>{{ category.name }}</li>
+                <li class="category" data-id="{{ category.id }}">
+                    {{ category.name }}
+                    <div class="product-carousel"></div>
+                </li>
             {% endfor %}
         </ul>
     </aside>
-    <section class="products">
-        <h2>Товары</h2>
-        <div class="product-grid">
-            {% for product in products %}
-                <div class="product-card">
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                    <h3>{{ product.name }}</h3>
-                    <p>{{ product.price }} руб.</p>
-                </div>
-            {% endfor %}
-        </div>
-    </section>
 </div>
 {% endblock %}
