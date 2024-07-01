@@ -1,71 +1,32 @@
+/* Добавляем эти стили в начало файла */
+html, body {
+    overflow-x: hidden;
+}
+
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;    margin: 0;
+    line-height: 1.6;
+    margin: 0;
     padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 3fr;
     gap: 20px;
     padding: 20px;
+    flex-grow: 1;
 }
 
 .categories {
-    display: grid;
-    gap: 10px;
-}
-.product-carousel {
-    display: none;
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    margin-top: 10px;
-    border: 1px solid #ddd; /* Добавлено для отладки */
-    min-height: 200px; /* Добавлено для отладки */
-}
-
-.carousel-container {
-    display: flex;
-    overflow-x: auto; /* Изменено с scroll на auto */
-    scroll-behavior: smooth;
-    padding: 10px 0;
-}
-
-.product-card {
-    flex: 0 0 auto;
-    width: 180px; /* Уменьшено для лучшей видимости */
-    margin-right: 10px;
-    border: 1px solid #ddd;
+    background-color: #f8f8f8;
     padding: 10px;
-    text-align: center;
-    background-color: #f9f9f9; /* Добавлено для лучшей видимости */
-}
-
-.product-card img {
-    max-width: 100%;
-    height: auto;
-    max-height: 100px; /* Добавлено ограничение высоты */
-}
-
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0,0,0,0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 1;
-}
-
-.prev {
-    left: 0;
-}
-
-.next {
-    right: 0;
+    border-radius: 5px;
+    overflow-y: auto;
+    max-height: calc(100vh - 100px);
 }
 
 .category {
@@ -73,5 +34,102 @@ body {
     padding: 10px;
     border: 1px solid #ddd;
     margin-bottom: 5px;
-    background-color: #f0f0f0; /* Добавлено для лучшей видимости */
+    background-color: #f0f0f0;
+}
+
+.product-carousel {
+    display: none;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    position: relative;
+}
+
+.swiper {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.swiper-slide {
+    width: auto;
+    height: auto;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    background-color: #f9f9f9;
+    width: 200px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 18px;
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .product-card {
+        width: 100%; /* Изменено с фиксированной ширины на 100% */
+        max-width: 250px; /* Добавлено ограничение максимальной ширины */
+        height: auto; /* Изменено с фиксированной высоты на auto */
+        margin: 0 auto; /* Центрирование карточки */
+    }
+
+    .swiper-slide {
+        display: flex;
+        justify-content: center;
+    }
+
+    .swiper {
+        padding: 0 20px; /* Добавлено отступы по бокам для кнопок навигации */
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 20px; /* Уменьшен размер кнопок для мобильной версии */
+        height: 20px;
+    }
+
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+        font-size: 14px; /* Уменьшен размер стрелок */
+    }
+}
+
+/* Дополнительные стили для обеспечения отзывчивости */
+.swiper-wrapper {
+    display: flex;
+    align-items: stretch;
+}
+
+.swiper-slide {
+    height: auto;
 }

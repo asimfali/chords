@@ -1,3 +1,4 @@
+<!-- templates/home.html -->
 {% extends 'base.html' %}
 {% load static %}
 
@@ -5,14 +6,18 @@
 <div class="grid-container">
     <aside class="categories">
         <h2>Категории</h2>
-        <ul id="category-list">
+        <div id="category-list">
             {% for category in categories %}
-                <li class="category" data-id="{{ category.id }}">
+                <div class="category" data-id="{{ category.id }}">
                     {{ category.name }}
                     <div class="product-carousel"></div>
-                </li>
+                </div>
             {% endfor %}
-        </ul>
+        </div>
     </aside>
+    <section class="products">
+        <h2>Продукты</h2>
+        <p>Выберите категорию, чтобы увидеть продукты</p>
+    </section>
 </div>
 {% endblock %}
