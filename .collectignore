@@ -1,0 +1,16 @@
+*.pyc
+__pycache__
+venv/*
+.git/*
+.idea/*
+*.jpeg
+*.png
+*.csv
+*.xlsx
+*.sqlite3
+django-modules-collector.py
+manage.py
+*wsgi.py
+*asgi.py
+*__init__
+*migrations/*
