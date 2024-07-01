@@ -15,28 +15,63 @@ body {
     display: grid;
     gap: 10px;
 }
-
-.category {
-    background-color: #f0f0f0;
-    padding: 10px;
-    cursor: pointer;
-}
-
 .product-carousel {
     display: none;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
-    padding: 10px;
-    overflow-x: auto;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 10px;
+    border: 1px solid #ddd; /* Добавлено для отладки */
+    min-height: 200px; /* Добавлено для отладки */
+}
+
+.carousel-container {
+    display: flex;
+    overflow-x: auto; /* Изменено с scroll на auto */
+    scroll-behavior: smooth;
+    padding: 10px 0;
 }
 
 .product-card {
+    flex: 0 0 auto;
+    width: 180px; /* Уменьшено для лучшей видимости */
+    margin-right: 10px;
     border: 1px solid #ddd;
     padding: 10px;
     text-align: center;
+    background-color: #f9f9f9; /* Добавлено для лучшей видимости */
 }
 
 .product-card img {
     max-width: 100%;
     height: auto;
+    max-height: 100px; /* Добавлено ограничение высоты */
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+.category {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    background-color: #f0f0f0; /* Добавлено для лучшей видимости */
 }
