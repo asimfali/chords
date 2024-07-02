@@ -1,0 +1,42 @@
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .product-card {
+        width: 100%; /* Изменено с фиксированной ширины на 100% */
+        max-width: 250px; /* Добавлено ограничение максимальной ширины */
+        height: auto; /* Изменено с фиксированной высоты на auto */
+        margin: 0 auto; /* Центрирование карточки */
+    }
+
+    .swiper-slide {
+        display: flex;
+        justify-content: center;
+    }
+
+    .swiper {
+        padding: 0 20px; /* Добавлено отступы по бокам для кнопок навигации */
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 20px; /* Уменьшен размер кнопок для мобильной версии */
+        height: 20px;
+    }
+
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+        font-size: 14px; /* Уменьшен размер стрелок */
+    }
+}
+
+/* Дополнительные стили для обеспечения отзывчивости */
+.swiper-wrapper {
+    display: flex;
+    align-items: stretch;
+}
+
+.swiper-slide {
+    height: auto;
+}

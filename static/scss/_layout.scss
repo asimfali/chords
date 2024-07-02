@@ -1,0 +1,14 @@
+.grid-container {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.categories {
+    background-color: $background-color;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-y: auto;
+    max-height: calc(100vh - 100px);
+}

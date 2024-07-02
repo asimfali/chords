@@ -1,6 +1,11 @@
 <!-- templates/home.html -->
 {% extends 'base.html' %}
+{#{% load compress %}#}
 {% load static %}
+{% load sass_tags %}
+{#{% compress css %}#}
+{#    <link rel="stylesheet" type="text/x-scss" href="{% sass_src 'scss/main.scss' %}">#}
+{#{% endcompress %}#}
 
 {% block content %}
 <div class="grid-container">
@@ -15,9 +20,5 @@
             {% endfor %}
         </div>
     </aside>
-    <section class="products">
-        <h2>Продукты</h2>
-        <p>Выберите категорию, чтобы увидеть продукты</p>
-    </section>
 </div>
 {% endblock %}

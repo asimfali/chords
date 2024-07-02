@@ -6,4 +6,5 @@ app_name = 'prod'
 urlpatterns = [
     path('', views.home, name='home'),
     path('api/products/', views.product_list, name='product_list'),
+    path('debug', views.debug_static_files, name='debug')
 ]

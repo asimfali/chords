@@ -1,4 +1,4 @@
-/* Добавляем эти стили в начало файла */
+/* static/css/style.css */
 html, body {
     overflow-x: hidden;
 }
@@ -15,7 +15,7 @@ body {
 
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    /*grid-template-columns: 1fr 3fr;*/
     gap: 20px;
     padding: 20px;
     flex-grow: 1;
@@ -61,8 +61,8 @@ body {
     padding: 10px;
     text-align: center;
     background-color: #f9f9f9;
-    width: 200px;
-    height: 250px;
+    width: 400px; /* Увеличено для десктопной версии */
+    height: 500px; /* Увеличено для десктопной версии */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -70,7 +70,7 @@ body {
 
 .product-card img {
     width: 100%;
-    height: 150px;
+    height: 300px; /* Увеличено для десктопной версии */
     object-fit: contain;
 }
 
@@ -89,6 +89,10 @@ body {
 .swiper-button-next:after,
 .swiper-button-prev:after {
     font-size: 18px;
+}
+
+.swiper-button-disabled {
+    display: none; /* Скрываем кнопку, когда она отключена */
 }
 
 @media (max-width: 768px) {

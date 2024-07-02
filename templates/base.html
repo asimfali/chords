@@ -1,4 +1,7 @@
+<!-- templates/base.html -->
+{#{% load compress %}#}
 {% load static %}
+{% load sass_tags %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,7 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Интернет-магазин{% endblock %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{#    {% compress css %}#}
+    <link rel="stylesheet" type="text/x-scss" href="{% sass_src 'scss/main.scss' %}">
+{#    {% endcompress %}#}
 </head>
 <body>
     <header>
