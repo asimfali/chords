@@ -30,6 +30,17 @@
         font-size: 14px; /* Уменьшен размер стрелок */
     }
 }
+@media (max-width: 768px) {
+    .product-card {
+        height: calc(25vh - 20px); // Увеличиваем высоту для планшетов и смартфонов
+    }
+}
+
+@media (max-width: 480px) {
+    .product-card {
+        height: calc(25vh - 20px); // Еще больше увеличиваем высоту для смартфонов
+    }
+}
 
 /* Дополнительные стили для обеспечения отзывчивости */
 .swiper-wrapper {

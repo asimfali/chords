@@ -4,8 +4,8 @@ export const loadingState = {
     currentPage: 1
 };
 
-export function resetLoadingState() {
+export const resetLoadingState = () => {
     loadingState.isLoading = false;
     loadingState.reachedEnd = false;
     loadingState.currentPage = 1;
-}
+};

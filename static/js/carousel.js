@@ -1,9 +1,7 @@
 import { loadProducts } from './api.js';
 import { loadingState, resetLoadingState } from './state.js';
 
-export function initializeCarousel(categoryId, carousel) {
-    // console.log('Initializing carousel for category:', categoryId);
-
+export const initializeCarousel = (categoryId, carousel) => {
     resetLoadingState();
 
     carousel.innerHTML = `
@@ -19,45 +17,63 @@ export function initializeCarousel(categoryId, carousel) {
     const prevButton = carousel.querySelector('.swiper-button-prev');
     const nextButton = carousel.querySelector('.swiper-button-next');
 
-    carousel.style.display = 'block';
-
-    let limit = 5;
-
     loadProducts(categoryId, swiperWrapper).then(() => {
-        initSwiper();
+        initSwiper(swiperContainer, categoryId, swiperWrapper, prevButton, nextButton);
     });
+};
 
-    function initSwiper() {
-        if (typeof Swiper === 'undefined') {
-            console.error('Swiper is not loaded');
-            return;
-        }
+const initSwiper = (swiperContainer, categoryId, swiperWrapper, prevButton, nextButton) => {
+    if (typeof Swiper === 'undefined') {
+        console.error('Swiper is not loaded');
+        return;
+    }
 
-        new Swiper(swiperContainer, {
-            slidesPerView: 'auto',
-            spaceBetween: 10,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
+    new Swiper(swiperContainer, {
+        slidesPerView: 'auto',
+        spaceBetween: 10,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            320: {
+                slidesPerView: 1,
             },
-            breakpoints: {
-                320: {
-                    slidesPerView: 1,
-                },
-                640: {
-                    slidesPerView: 2,
-                },
-                1024: {
-                    slidesPerView: 6,
-                }
+            768: {
+                slidesPerView: 2,
             },
-            on: {
-                slideChange: function () {
-                    if (this.isEnd && !loadingState.isLoading && !loadingState.reachedEnd) {
-                        loadProducts(categoryId, swiperWrapper, limit);
-                    }
+            1024: {
+                slidesPerView: 4,
+            },
+            1440: {
+                slidesPerView: 6,
+            }
+        },
+        on: {
+            init() {
+                this.update();
+                toggleNavigationButtons(this, prevButton, nextButton);
+            },
+            slideChange() {
+                toggleNavigationButtons(this, prevButton, nextButton);
+                if (this.isEnd && !loadingState.isLoading && !loadingState.reachedEnd) {
+                    loadProducts(categoryId, swiperWrapper);
                 }
             }
-        });
+        }
+    });
+};
+
+const toggleNavigationButtons = (swiper, prevButton, nextButton) => {
+    if (swiper.isBeginning) {
+        prevButton.classList.add('swiper-button-disabled');
+    } else {
+        prevButton.classList.remove('swiper-button-disabled');
     }
-}
+
+    if (swiper.isEnd) {
+        nextButton.classList.add('swiper-button-disabled');
+    } else {
+        nextButton.classList.remove('swiper-button-disabled');
+    }
+};

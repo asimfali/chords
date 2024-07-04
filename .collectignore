@@ -15,3 +15,8 @@ manage.py
 *__init__*
 *migrations/*
 *staticfiles/*
+static/CACHE/*
+static/css/swiper-bundle.css
+static/js/swiper-bundle.js
+templates/debug.html
+static/scss/main.css

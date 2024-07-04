@@ -7,12 +7,12 @@
         <h2>Категории</h2>
         <div id="category-list">
             {% for category in categories %}
-                <div class="category" data-id="{{ category.id }}">
+                <button class="category-btn {% cycle 'odd' 'even' %}" data-id="{{ category.id }}">
                     {{ category.name }}
-                    <div class="product-carousel"></div>
-                </div>
+                </button>
             {% endfor %}
         </div>
     </aside>
+    <div id="carousel-container"></div>
 </div>
 {% endblock %}
