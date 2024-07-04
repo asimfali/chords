@@ -1,17 +1,21 @@
-<!-- templates/base.html -->
-{#{% load compress %}#}
 {% load static %}
-{% load sass_tags %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Интернет-магазин{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
-{#    {% compress css %}#}
-    <link rel="stylesheet" type="text/x-scss" href="{% sass_src 'scss/main.scss' %}">
-{#    {% endcompress %}#}
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    {% load compress %}
+
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.css' %}">
+    {% endcompress %}
+
+    {% compress css %}
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'scss/main.scss' %}">
+    {% endcompress %}
+
 </head>
 <body>
     <header>
@@ -27,7 +31,7 @@
         <p>&copy; {% now "Y" %} Наш магазин</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/swiper-bundle.js' %}"></script>
+    <script type="module" src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

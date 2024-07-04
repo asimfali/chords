@@ -21,6 +21,7 @@ def debug_static_files(request):
     }
     return render(request, 'debug.html', context)
 
+
 def home(request):
     categories = Category.objects.all()
     return render(request, 'home.html', {'categories': categories})
@@ -50,9 +51,5 @@ def product_list(request):
         }
         for product in products_page
     ]
-
-    print(f"Category ID: {category_id}, Page: {page}, Limit: {limit}")
-    print(f"Total Products: {products.count()}")
-    print(f"Products on current page: {len(data)}")
 
     return JsonResponse(data, safe=False)

@@ -7,42 +7,31 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    let currentSwiper = null;
-    let currentPage = 1;
-    let isLoading = false;
-    let reachedEnd = false;
-
     categoryList.addEventListener('click', function(e) {
         const category = e.target.closest('.category');
         if (category) {
             const categoryId = category.dataset.id;
             const carousel = category.querySelector('.product-carousel');
 
-            // Проверяем, не является ли целевой элемент кнопкой навигации
             if (e.target.closest('.swiper-button-next') || e.target.closest('.swiper-button-prev')) {
                 return;
             }
 
             if (carousel.style.display === 'block') {
                 carousel.style.display = 'none';
-                if (currentSwiper) {
-                    currentSwiper.destroy();
-                    currentSwiper = null;
-                }
             } else {
-                if (currentSwiper) {
-                    currentSwiper.destroy();
-                    currentSwiper = null;
+                if (typeof Swiper === 'undefined') {
+                    console.error('Swiper is not loaded. Trying to load it dynamically.');
+                    const script = document.createElement('script');
+                    script.src = 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js';
+                    script.onload = function() {
+                        initializeCarousel(categoryId, carousel);
+                    };
+                    document.head.appendChild(script);
+                } else {
+                    initializeCarousel(categoryId, carousel);
                 }
-
-                // Сброс параметров
-                currentPage = 1;
-                isLoading = false;
-                reachedEnd = false;
-
-                initializeCarousel(categoryId, carousel);
             }
         }
     });
-
 });

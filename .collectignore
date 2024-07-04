@@ -12,5 +12,6 @@ django-modules-collector.py
 manage.py
 *wsgi.py
 *asgi.py
-*__init__
+*__init__*
 *migrations/*
+*staticfiles/*

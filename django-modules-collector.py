@@ -18,7 +18,7 @@ def should_ignore(path, ignore_patterns):
 
 def collect_django_modules(start_path='.', ignore_file='.collectignore'):
     output_file = 'collected_django_modules.txt'
-    allowed_extensions = ('.py', '.css', '.js', '.html')
+    allowed_extensions = ('.py', '.css', '.js', '.html', 'scss')
     ignore_patterns = load_ignore_patterns(ignore_file)
 
     with open(output_file, 'w', encoding='utf-8') as outfile:

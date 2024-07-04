@@ -71,8 +71,8 @@ TEMPLATES = [
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # 'compressor.finders.CompressorFinder',
-    'sass_processor.finders.CssFinder',
+    'compressor.finders.CompressorFinder',
+    # 'sass_processor.finders.CssFinder',
 ]
 
 WSGI_APPLICATION = 'tepl.wsgi.application'
@@ -105,9 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -118,10 +115,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-# STATIC_ROOT = BASE_DIR / 'static'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-SASS_PROCESSOR_ROOT = STATIC_ROOT
+SASS_PROCESSOR_ROOT = BASE_DIR / 'static'
 SASS_PROCESSOR_ENABLED = True
 SASS_PROCESSOR_INCLUDE_DIRS = [
     BASE_DIR / 'static/scss',
@@ -129,6 +125,7 @@ SASS_PROCESSOR_INCLUDE_DIRS = [
 
 COMPRESS_ROOT = BASE_DIR / 'static'
 COMPRESS_ENABLED = True
+COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',  'compressor.filters.cssmin.CSSMinFilter']
 
 COMPRESS_OFFLINE = False
 
