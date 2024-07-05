@@ -1,41 +1,33 @@
 import { loadingState } from './state.js';
 import { createProductCard } from './productCard.js';
 
-export const loadProducts = (categoryId, container, limit = 10) => {
+export const loadProducts = async (categoryId, container, limit = 10) => {
     if (loadingState.isLoading || loadingState.reachedEnd) return Promise.resolve();
 
     loadingState.isLoading = true;
 
-    return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', `/api/products/?category=${categoryId}&page=${loadingState.currentPage}&limit=${limit}`, true);
-        xhr.onload = () => {
-            if (xhr.status === 200) {
-                const data = JSON.parse(xhr.responseText);
-                console.log('Products loaded:', data.length);
-                if (data.length === 0) {
-                    console.log('No more products to load');
-                    loadingState.reachedEnd = true;
-                } else {
-                    data.forEach(product => {
-                        const productCard = createProductCard(product);
-                        container.appendChild(productCard);
-                    });
-                    loadingState.currentPage++;
-                }
-                loadingState.isLoading = false;
-                resolve();
-            } else {
-                console.error('Error loading products:', xhr.statusText);
-                loadingState.isLoading = false;
-                reject(new Error(xhr.statusText));
+    try {
+        const response = await axios.get(`/api/products/`, {
+            params: {
+                category: categoryId,
+                page: loadingState.currentPage,
+                limit: limit
             }
-        };
-        xhr.onerror = () => {
-            console.error('Network error occurred');
-            loadingState.isLoading = false;
-            reject(new Error('Network error'));
-        };
-        xhr.send();
-    });
+        });
+
+        const data = response.data;
+        if (data.length === 0) {
+            loadingState.reachedEnd = true;
+        } else {
+            data.forEach(product => {
+                const productCard = createProductCard(product);
+                container.appendChild(productCard);
+            });
+            loadingState.currentPage++;
+        }
+        loadingState.isLoading = false;
+    } catch (error) {
+        console.error('Error loading products:', error);
+        loadingState.isLoading = false;
+    }
 };

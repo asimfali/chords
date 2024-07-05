@@ -1,33 +1,16 @@
 import os
 from pathlib import Path
-
-from django.middleware.security import SecurityMiddleware
+from django.core.management.utils import get_random_secret_key
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-from django.core.management.utils import get_random_secret_key
-
-# SECRET_KEY = 'django-insecure-qpp_5^skq!*x=awc%+%n3!u_wy$r1^wa=p7gw89$ttr45-uvxr'
-
 SECRET_KEY = get_random_secret_key()
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = False  # Установите в True для продакшена
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-X_FRAME_OPTIONS = 'DENY'
-SECURE_HSTS_SECONDS = 31536000  # 1 год
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.30.73.211', '*']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '[::1]', 'your_domain.com', 'lab']
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -68,17 +51,7 @@ TEMPLATES = [
     },
 ]
 
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
-    # 'sass_processor.finders.CssFinder',
-]
-
 WSGI_APPLICATION = 'tepl.wsgi.application'
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -86,9 +59,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -105,6 +75,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+    'compressor.finders.CompressorFinder',
+]
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -115,48 +92,28 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-SASS_PROCESSOR_ROOT = BASE_DIR / 'static'
-SASS_PROCESSOR_ENABLED = True
-SASS_PROCESSOR_INCLUDE_DIRS = [
-    BASE_DIR / 'static/scss',
-]
-
-COMPRESS_ROOT = BASE_DIR / 'static'
-COMPRESS_ENABLED = True
-COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',  'compressor.filters.cssmin.CSSMinFilter']
-
-COMPRESS_OFFLINE = False
-
-COMPRESS_DEBUG_TOGGLE = 'nocompress'
-
-COMPRESS_PRECOMPILERS = (
-    ('text/x-scss', 'django_libsass.SassCompiler'),
-)
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+SASS_PROCESSOR_ROOT = BASE_DIR / 'static'
+
+COMPRESS_ROOT = BASE_DIR / 'static'
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 IMPORT_IMAGES_DIR = BASE_DIR / 'import_images'
 
-if DEBUG:
-    import mimetypes
-
-    mimetypes.add_type("application/javascript", ".js", True)
-
-    # INSTALLED_APPS += ['django_extensions']
-    # MIDDLEWARE += ['django_extensions.middleware.SecurityMiddleware']
-
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000',
-    'http://lab:8000',
     'http://127.0.0.1:8000',
-    # Добавьте другие разрешенные источники
+    'http://lab:8000',
 ]
+
+CSRF_COOKIE_SECURE = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG

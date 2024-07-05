@@ -1,25 +1,7 @@
-# prod/views.py
 from django.shortcuts import render
 from .models import Category, Product
 from django.http import JsonResponse
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-
-import os
-from django.conf import settings
-
-
-def debug_static_files(request):
-    static_root = settings.STATIC_ROOT
-    static_dirs = settings.STATICFILES_DIRS
-    sass_file = os.path.join(static_dirs[0], 'scss', 'main.scss')
-
-    context = {
-        'static_root': static_root,
-        'static_dirs': static_dirs,
-        'sass_file_exists': os.path.exists(sass_file),
-        'sass_file_path': sass_file,
-    }
-    return render(request, 'debug.html', context)
 
 
 def home(request):
@@ -30,10 +12,10 @@ def home(request):
 def product_list(request):
     category_id = request.GET.get('category')
     page = request.GET.get('page', 1)
-    limit = int(request.GET.get('limit', 10))  # Получаем значение лимита из запроса
+    limit = int(request.GET.get('limit', 10))
 
     products = Product.objects.filter(category_id=category_id)
-    paginator = Paginator(products, limit)  # Используем лимит для пагинации
+    paginator = Paginator(products, limit)
 
     try:
         products_page = paginator.page(page)
@@ -47,7 +29,8 @@ def product_list(request):
             'id': product.id,
             'name': product.name,
             'price': str(product.price),
-            'image': product.image.url if product.image else ''
+            'image': product.image.url if product.image else '',
+            'documentation': product.latest_documentation().file.url if product.latest_documentation() else None
         }
         for product in products_page
     ]

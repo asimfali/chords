@@ -1,4 +1,5 @@
 {% load static %}
+{% load sass_tags %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -13,9 +14,8 @@
     {% endcompress %}
 
     {% compress css %}
-    <link rel="stylesheet" type="text/x-scss" href="{% static 'scss/main.scss' %}">
+    <link rel="stylesheet" type="text/x-scss" href="{% sass_src 'scss/main.scss' %}">
     {% endcompress %}
-
 </head>
 <body>
     <header>
@@ -31,6 +31,7 @@
         <p>&copy; {% now "Y" %} Наш магазин</p>
     </footer>
 
+    <script src="{% static 'js/axios.min.js' %}"></script>
     <script src="{% static 'js/swiper-bundle.js' %}"></script>
     <script type="module" src="{% static 'js/main.js' %}"></script>
     <div id="specs-modal" class="modal">

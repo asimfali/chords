@@ -20,3 +20,6 @@ static/css/swiper-bundle.css
 static/js/swiper-bundle.js
 templates/debug.html
 static/scss/main.css
+static/js/axios.min.js
+prod/management/commands/import_data.py
+prod/tests.py

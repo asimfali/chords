@@ -8,7 +8,6 @@ export const initializeCategoryClick = (categoryList) => {
         const categoryBtn = e.target.closest('.category-btn');
         if (categoryBtn) {
             const categoryId = categoryBtn.dataset.id;
-            console.log('Category clicked:', categoryId);
 
             if (currentCategoryId === categoryId) {
                 if (currentCarousel) {
@@ -32,7 +31,6 @@ export const initializeCategoryClick = (categoryList) => {
             currentCarousel.setAttribute('data-category', categoryId);
 
             categoryBtn.insertAdjacentElement('afterend', currentCarousel);
-            console.log('Carousel element created:', currentCarousel);
 
             initializeCarousel(categoryId, currentCarousel);
             currentCategoryId = categoryId;

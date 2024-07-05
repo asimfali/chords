@@ -4,10 +4,10 @@
     }
 
     .product-card {
-        width: 100%; /* Изменено с фиксированной ширины на 100% */
-        max-width: 250px; /* Добавлено ограничение максимальной ширины */
-        height: auto; /* Изменено с фиксированной высоты на auto */
-        margin: 0 auto; /* Центрирование карточки */
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+        margin: 0 auto;
     }
 
     .swiper-slide {
@@ -16,33 +16,26 @@
     }
 
     .swiper {
-        padding: 0 20px; /* Добавлено отступы по бокам для кнопок навигации */
+        padding: 0 20px;
     }
 
     .swiper-button-next,
     .swiper-button-prev {
-        width: 20px; /* Уменьшен размер кнопок для мобильной версии */
+        width: 20px;
         height: 20px;
     }
 
     .swiper-button-next:after,
     .swiper-button-prev:after {
-        font-size: 14px; /* Уменьшен размер стрелок */
+        font-size: 14px;
     }
 }
 @media (max-width: 768px) {
     .product-card {
-        height: calc(25vh - 20px); // Увеличиваем высоту для планшетов и смартфонов
+        height: calc(25vh - 20px);
     }
 }
 
-@media (max-width: 480px) {
-    .product-card {
-        height: calc(25vh - 20px); // Еще больше увеличиваем высоту для смартфонов
-    }
-}
-
-/* Дополнительные стили для обеспечения отзывчивости */
 .swiper-wrapper {
     display: flex;
     align-items: stretch;

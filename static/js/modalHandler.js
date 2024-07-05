@@ -14,6 +14,12 @@ export const initializeModal = (modal) => {
             const productId = productCard.id.split('-')[1];
             const productName = productCard.querySelector('h3').textContent;
             showSpecs(productId, productName);
+        } else if (e.target.classList.contains('view-docs')) {
+            e.stopPropagation();
+            const url = e.target.getAttribute('data-url');
+            if (url) {
+                window.location.href = url;
+            }
         }
     });
 

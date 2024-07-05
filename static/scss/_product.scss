@@ -4,7 +4,7 @@
     text-align: center;
     background-color: #f9f9f9;
     width: 100%;
-    height: calc(33vh - 20px); // 1/3 высоты экрана минус отступы
+    height: calc(33vh - 20px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -45,12 +45,19 @@
                 background-color: #007B9E;
             }
         }
+
+        &.view-docs {
+            background-color: #FF9800;
+            color: white;
+
+            &:hover {
+                background-color: #FB8C00;
+            }
+
+            &:disabled {
+                background-color: #ccc;
+                cursor: not-allowed;
+            }
+        }
     }
 }
-
-//@media (min-width: 1024px) {
-//    .product-card {
-//        width: 200%; // Увеличиваем ширину для десктопной версии
-//        height: calc(66vh - 20px); // Увеличиваем высоту для десктопной версии
-//    }
-//}

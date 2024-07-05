@@ -8,3 +8,4 @@ import_images/
 staticfiles/
 static/CACHE/
 collected_django_modules.txt
+prod/migrations/

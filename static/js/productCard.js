@@ -9,6 +9,7 @@ export const createProductCard = (product) => {
             <div class="product-buttons">
                 <button class="add-to-cart">В корзину</button>
                 <button class="view-specs">Технические характеристики</button>
+                <button class="view-docs"${product.documentation ? '' : ' disabled'} data-url="${product.documentation || ''}">Документация</button>
             </div>
         </div>
     `;
